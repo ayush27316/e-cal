@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Next",
+  "version": "1.0",
+  "description": "toggle next link in the navigation",
+  "permissions": [],
+  "action": {},
+  "content_scripts": [
+    {
+      "js": ["./scripts/content.js"],
+      "matches": [
+        "https://mcgill-ca-next.courseleaf.com/en/undergraduate/*"
+      ]
+    }
+  ]
+}
