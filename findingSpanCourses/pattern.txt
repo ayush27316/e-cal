@@ -1,0 +1,78 @@
+I have a list of webpages that starts with /programs
+on each of these pages we have similar html pattern. 
+
+Each program page contains the porgram title, and courses that fall into this program
+Task is to parse the html to get program title, and all the courses tha fall within it. 
+The website is secured so no program can crawl through webpages. What I will isntead do is 
+design a browser extension with javascript and listen for different keyboard events. And when 
+user preses a specif keyboard shortcut we go theought the html of the page and start parsing
+when pasring succeeds we append the result to a csv file with first column beign program name
+and then rest of the columns with course title. since the number of courses varies based on program
+we will not have a heading in this csv file. csv file must be appended and saved to disk.
+
+//main content wrapper
+<main id="contentarea">
+	
+	//name of the program
+	<h1 class="page-title">{Porgam Title}</h1>
+	
+	//wrapper for courses of this program, which can be further 
+	//sectioned into Required Courses, Compolementanry Courses, Elective Courses, or something progam sepcific
+    //each course section may or may not be further divided into multiple sub sections
+	//but the general strucure is maintained as follows
+	<div id="coursestextcontainer" class="page_content tab_content" role="tabpanel">
+		
+		<h2>{course_section}</h2>
+		<div class="courselist-wrapper">
+			<table class="sc_courselist">			
+                <colgroup>
+                    <col class="codecol">
+                    <col class="titlecol">
+                    <col align="char" char="." class="hourscol">
+                </colgroup>
+                <thead>
+                    <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Title</th>
+                    <th scope="col" class="hourscol">Credits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="even firstrow" tabindex="0">
+                        <td class="codecol">{Course Code (eg: COMP 202)}</td>
+                        <td>{title of the course (eg: Foundations of Programming.)}<sup>1</sup></td>
+                        <td class="hourscol">{Credit count: 3}</td>
+                    </tr>
+                    <tr class="odd" tabindex="0"> <td class="codecol">COMP 206</td><td>Introduction to Software Systems.</td><td class="hourscol">3</td></tr>
+                    <tr class="even" tabindex="0"><td class="codecol">COMP 250</td><td>Introduction to Computer Science.</td><td class="hourscol">3</td></tr>
+                    <tr class="odd lastrow" tabindex="0"><td class="codecol">MATH 240</td><td>Discrete Structures.</td><td class="hourscol">3</td></tr>
+                </tbody>
+            </table>
+		</div>
+
+
+        <h2>{course_section}</h2>
+        <h3>{course_sub_section}</h3>
+		<div class="courselist-wrapper">
+			<table class="sc_courselist">			
+                <colgroup>...</colgroup>
+                <thead>...</thead>
+                <tbody>
+                    <tr class="even firstrow" tabindex="0"></tr>
+                    <tr class="odd lastrow" tabindex="0"><td class="codecol">MATH 240</td><td>Discrete Structures.</td><td class="hourscol">3</td></tr>
+                </tbody>
+            </table>
+		</div>
+        <h3>{course_sub_section}</h3>
+		<div class="courselist-wrapper">
+			<table class="sc_courselist">			
+                <colgroup>...</colgroup>
+                <thead>...</thead>
+                <tbody>
+                    <tr class="even firstrow" tabindex="0"></tr>
+                    <tr class="odd lastrow" tabindex="0"><td class="codecol">MATH 245</td><td>Discrete Structures.</td><td class="hourscol">3</td></tr>
+                </tbody>
+            </table>
+		</div>
+	</div>
+</main>
